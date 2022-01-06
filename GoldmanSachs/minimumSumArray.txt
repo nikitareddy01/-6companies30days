@@ -1,0 +1,19 @@
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        
+        INT_MAX = float("infinity")
+        N = len(nums)
+        res = INT_MAX
+        
+        s, e = 0, 0
+        cursum = 0
+        
+        while e < N:
+            cursum += nums[e]
+            while cursum >= target:
+                res = min(res, e-s+1)
+                cursum -= nums[s]
+                s += 1
+            e += 1
+        
+        return res if res != INT_MAX else 0
